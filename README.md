@@ -3,7 +3,7 @@ Simple save system for unity with a safe preservation and support to save boolea
 
 Features:
 1. Conveniently save and load data types
-2. Safely saving and updating existing data will avoid overwriting data if you accidentally use the SaveBool function instead of UpdateBool.
+2. Safely saving and updating existing data will avoid overwriting data if you accidentally use the Save function instead of Update.
 3. Support for saving Boolean variables
 
 Installation:
