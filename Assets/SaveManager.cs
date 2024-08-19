@@ -332,10 +332,10 @@ public static class SaveManager
         Debug.Log($"{saveName} is not available in PlayerPrefs");
     }
     private static void AvailableLogError(string saveName) {
-        Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use Update function")
+        Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use Update function");
     }
     private static void UpdateLogError(string saveName) {
-        Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use Save function")
+        Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use Save function");
     }
  
 
