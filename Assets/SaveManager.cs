@@ -19,7 +19,7 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
         PlayerPrefs.SetInt(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateInt function");
+            AvailableLogError(saveName);
         }
     }
 
@@ -34,10 +34,9 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
         PlayerPrefs.SetInt(saveName, value);
         } else if(forceUpdate) {
-            UpdateValueLog(saveName);
             UpdateInt(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateInt function");
+            AvailableLogError(saveName);
         }
     }
     /// <summary>
@@ -49,7 +48,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetInt(saveName, value);
         } else {
-            Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use SaveInt function");
+            UpdateLogError(saveName);
         }
     }
     /// <summary>
@@ -92,7 +91,7 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetFloat(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateFloat function");
+            AvailableLogError(saveName);
         }
     }
     
@@ -107,10 +106,9 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
         PlayerPrefs.SetFloat(saveName, value);
         } else if(forceUpdate) {
-            UpdateValueLog(saveName);
             UpdateFloat(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateFloat function");
+            AvailableLogError(saveName);
         }
     }
 
@@ -123,7 +121,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetFloat(saveName, value);
         } else {
-            Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use SaveFloat function");
+            UpdateLogError(saveName);
         }
     }
 
@@ -168,7 +166,7 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetString(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateString function");
+            AvailableLogError(saveName);
         }
     }
 
@@ -182,10 +180,9 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
         PlayerPrefs.SetString(saveName, value);
         } else if(forceUpdate) {
-            UpdateValueLog(saveName);
             UpdateString(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateString function");
+            AvailableLogError(saveName);
         }
     }
     
@@ -200,7 +197,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetString(saveName, value);
         } else {
-            Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use SaveString function");
+            UpdateLogError(saveName);
         }
     }
 
@@ -244,7 +241,7 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetInt(saveName, value ? 1 : 0);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateBool function");
+            AvailableLogError(saveName);
         }
     }
     /// <summary>
@@ -257,10 +254,9 @@ public static class SaveManager
         if(!PlayerPrefs.HasKey(saveName)) {
         PlayerPrefs.SetInt(saveName, value ? 1 : 0);
         } else if(forceUpdate) {
-            UpdateValueLog(saveName);
             UpdateBool(saveName, value);
         } else {
-            Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use UpdateBool function");
+            AvailableLogError(saveName);
         }
     }
 
@@ -274,7 +270,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
             PlayerPrefs.SetInt(saveName, value ? 1 : 0);
         } else {
-            Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use SaveBool function");
+            UpdateLogError(saveName);
         }
     }
 
@@ -332,14 +328,16 @@ public static class SaveManager
     public static void DeleteAllSaves() {
         PlayerPrefs.DeleteAll();
     }
-
-    private static void UpdateValueLog(string value) {
-        Debug.Log($"{value} is availble in PlayerPrefs. Active Update function");
-    }
     private static void ReturnValueLog(string saveName) {
         Debug.Log($"{saveName} is not available in PlayerPrefs");
     }
-
+    private static void AvailableLogError(string saveName) {
+        Debug.Log($"{saveName} is available in PlayerPrefs. If you need resaving value, use Update function")
+    }
+    private static void UpdateLogError(string saveName) {
+        Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use Save function")
+    }
+ 
 
 }
 }
