@@ -5,6 +5,7 @@ Features:
 1. Conveniently save and load data types
 2. Safely saving and updating existing data will avoid overwriting data if you accidentally use the Save function instead of Update.
 3. Support for saving Boolean variables
+4. The ability to save default values for variables locally in the project and later receive them when running the game (for example, to create basic functionality for rolling back settings)
 
 Installation:
 1. Download the "NvcSave" package
@@ -13,9 +14,9 @@ Installation:
 
 How to use:
 Add the following line to your script to use SaveManager - using NvcUtils.Save;
-There are 4 types of data saving - integer, float, string, Boolean
+Save manager is support there are 4 types of data saving - integer, float, string, boolean
 For each type, you can save data, overwrite, get.
-To delete data, the DeleteSave function is used, which takes the name of the save that you need to delete.
+To delete data, the DeleteSave or RemoveValue(if you are use DefaultValues class) function is used, which takes the name of the save that you need to delete.
 
 Example:
 I want to save and then get a boolean variable. I use
@@ -30,6 +31,16 @@ SaveManager.UpdateBool(mySaveName, mySaveBool);
 To delete a value, use:
 
 SaveManager.DeleteSave(mySaveName);
+
+To DefaultValues:
+
+DefaultValuesManager.SetDefaultValue(keyName, value);
+
+DefaultValuesManager.OverwriteValue(keyName, value);
+
+DefaultValues.GetDefaultValue(keyName);
+
+DefautValues.RemoveValue(keyName);
 
 Future Plans
 This library will be expanded in the future to include more features and improvements. Stay tuned for updates!
