@@ -11,6 +11,9 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 3.__Comprehensive XML Documentation__:
 -The included XML documentation within the codebase provides clear guidance and explanations, making it easy to understand and integrate the library into your project.
 
+4.__Generic type support__:
+-NvcSave is designed with flexibility in mind, supporting generic types to accommodate a wide range of data types. This ensures that you can save and load any data type, from simple primitives to complex custom objects, with ease.
+
 # Installation
 
 1.__Download the Repository__:
