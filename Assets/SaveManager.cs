@@ -72,7 +72,7 @@ public static class SaveManager
     /// <param name="keyNotFound">Value that return, if this saveName is not available in PlayerPrefs</param>
     /// <returns>Return integer value if value is available in PlayerPrefs, else return keyNotFound</returns>
 
-    public static int GetInt(string saveName, int keyNotFound) {
+    public static int TryGetInt(string saveName, int keyNotFound) {
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetInt(saveName);
         } else {
@@ -147,7 +147,7 @@ public static class SaveManager
     /// <param name="keyNotFound">Value that return, if this saveName is not available in PlayerPrefs</param>
     /// <returns>Return float value if value is available in PlayerPrefs, else return keyNotFound</returns>
 
-    public static float GetFloat(string saveName, int keyNotFound) {
+    public static float TryGetFloat(string saveName, float keyNotFound) {
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetFloat(saveName);
         } else {
@@ -222,7 +222,7 @@ public static class SaveManager
     /// <param name="keyNotFound">Value that return, if this saveName is not available in PlayerPrefs</param>
     /// <returns>Return string value if value is available in PlayerPrefs, else return keyNotFound</returns>
 
-    public static string GetString(string saveName, string keyNotFound) {
+    public static string TryGetString(string saveName, string keyNotFound) {
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetString(saveName);
         } else {
@@ -298,7 +298,7 @@ public static class SaveManager
     /// <param name="keyNotFound">Value that return, if this saveName is not available in PlayerPrefs</param>
     /// <returns>Return boolean value if value is available in PlayerPrefs, else return keyNotFound</returns>
 
-    public static bool GetBool(string saveName, bool keyNotFound) {
+    public static bool TryGetBool(string saveName, bool keyNotFound) {
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetInt(saveName) == 1;
         } else {
