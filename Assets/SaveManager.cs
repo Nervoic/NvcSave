@@ -10,6 +10,66 @@ public static class SaveManager
     /// </summary>
     private const int keyNotFound = -1;
 
+        /// <summary>
+    /// Saves values of all types to a json string if value is not found
+    /// </summary>
+    /// <typeparam name="T">Generalized function parameter for obtaining generalized types</typeparam>
+    /// <param name="saveName">Value saving name</param>
+    /// <param name="value">Value to save</param>
+        public static void Save<T>(string saveName, T value) {
+        if(!PlayerPrefs.HasKey(saveName)) {
+            SaveJson(saveName, value);
+        }
+    }
+
+    /// <summary>
+    /// Save values of all types to a json string and overwrite if value is found
+    /// </summary>
+    /// <typeparam name="T">Generalized function parameter for obtaining generalized types</typeparam>
+    /// <param name="saveName">Value saving name</param>
+    /// <param name="value">Value to save</param>
+    /// <param name="overwrite">Boolean variable that determines whether the value will be overwritten if this save already exists</param>
+    public static void Save<T>(string saveName, T value, bool overwrite) {
+        if(!PlayerPrefs.HasKey(saveName)) {
+            SaveJson(saveName, value);
+        } else if (overwrite) {
+            Overwrite(saveName, value);
+        }
+    }
+
+
+    /// <summary>
+    /// Overwrite values of all types to a json string if value is not found
+    /// </summary>
+    /// <typeparam name="T">Generalized function parameter for obtaining generalized types</typeparam>
+    /// <param name="saveName">Value overwrite name</param>
+    /// <param name="value">Value to overwrite</param>
+    public static void Overwrite<T>(string saveName, T value) {
+        if(PlayerPrefs.HasKey(saveName)) {
+            string jsonString = JsonUtility.ToJson(value);
+            PlayerPrefs.SetString(saveName, jsonString);
+        } else {
+            ReturnValueLog(saveName);
+        }
+    }
+
+    /// <summary>
+    /// Return value if this value is found
+    /// </summary>
+    /// <typeparam name="T">Generalized function parameter for obtaining generalized types</typeparam>
+    /// <param name="saveName">Save name to get</param>
+    /// <param name="keyNotFound">Value that will be returned if the save is not detected</param>
+    /// <returns>Return value or keyNotFound if this value is not found</returns>
+    public static T TryGet<T>(string saveName, T keyNotFound) {
+        if(PlayerPrefs.HasKey(saveName)) {
+            string value = PlayerPrefs.GetString(saveName);
+            T deserializedValue = JsonUtility.FromJson<T>(value);
+            return deserializedValue;
+        } else {
+            return keyNotFound;
+        }
+    }
+
     /// <summary>
     /// Save integer value in PlayerPrefs if this value is not available in PlayerPrefs
     /// </summary>
@@ -322,12 +382,20 @@ public static class SaveManager
     }
 
 
+    private static void SaveJson<T>(string saveName, T value) {
+        string jsonString = JsonUtility.ToJson(value);
+        PlayerPrefs.SetString(saveName, jsonString);
+    }
+
     /// <summary>
     /// Deleteing ALL saves from PlayerPrefs. Use only, if you are really need to delete ALL saves. Is dont using to delete only one save from PlayerPrefs
     /// </summary>
     public static void DeleteAllSaves() {
         PlayerPrefs.DeleteAll();
     }
+
+
+
     private static void ReturnValueLog(string saveName) {
         Debug.Log($"{saveName} is not available in PlayerPrefs");
     }
@@ -337,6 +405,7 @@ public static class SaveManager
     private static void UpdateLogError(string saveName) {
         Debug.Log($"{saveName} is not available in PlayerPrefs for overwrite value. If you need save value, use Save function");
     }
+    
  
 
 }
