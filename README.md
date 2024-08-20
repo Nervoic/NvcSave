@@ -6,7 +6,7 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 -Store data temporarily in memory during the execution of your program. This is particularly useful for creating a settings reset system or other temporary data storage needs.
 
 2.__Local Data Saving__:
--Save data directly to the player's computer with an easy-to-use API that ensures safe and reliable storage.
+-Save data directly to the player's computer with an easy-to-use API that ensures safe and reliable storage. And the ability to try to return a value allows you to set the value you need if it was not found when trying to get it, which can be used to safely load settings.
 
 3.__Comprehensive XML Documentation__:
 -The included XML documentation within the codebase provides clear guidance and explanations, making it easy to understand and integrate the library into your project.
