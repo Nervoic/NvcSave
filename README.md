@@ -2,7 +2,7 @@
 __NvcSave__ is a simple and reliable saving system for Unity that allows you to save data both locally on the player's computer and in memory during runtime. This system is designed for ease of use and safety, making it ideal for storing settings, game data, and more.
 
 # Features
-1. In-Memory Data Saving:
+1.__In-Memory Data Saving__:
 -Store data temporarily in memory during the execution of your program. This is particularly useful for creating a settings reset system or other temporary data storage needs.
 
 2.__Local Data Saving__:
