@@ -35,4 +35,6 @@ After you have added the string using NvcUtils.Save, you can use all the functio
 2. __SaveDefaultManager__:
 -It is used to store data in memory for the duration of the project. It can be useful for simple saves and system resets.
 
+For more information, see the xml documentation inside the code.
+
 
