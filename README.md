@@ -33,7 +33,7 @@ using NvcUtils.Save;
 After you have added the string using NvcUtils.Save, you can use all the functions from this library. The library contains 2 classes - SaveManager and SaveDefaultManager.
 
 1. __SaveManager__:
--It is used to save data locally on the player's computer. Supports saving int, float, string and boolean variables, overwriting saves, getting and deleting. it contains all the necessary checks to ensure that the program works correctly.
+-It is used to save data locally on the player's computer. Supports saving int, float, string and boolean variables, and generalized types, overwriting saves, getting and deleting. it contains all the necessary checks to ensure that the program works correctly.
 
 2. __SaveDefaultManager__:
 -It is used to store data in memory for the duration of the project. It can be useful for simple saves and system resets.
