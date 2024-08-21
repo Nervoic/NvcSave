@@ -1,8 +1,8 @@
 
 using UnityEngine;
 
-namespace NvcUtils.Save {
-public static class SaveManager
+namespace NvcUtils.NvcSave {
+public static class PrefsSaveManager
 {
 
     /// <summary>
@@ -57,6 +57,17 @@ public static class SaveManager
         }
     }
 
+    public static T Get<T>(string saveName) {
+        if(PlayerPrefs.HasKey(saveName)) {
+            string value = PlayerPrefs.GetString(saveName);
+            T deserializedValue = JsonUtility.FromJson<T>(value);
+            return deserializedValue;
+        } else {
+            NotFoundLog(saveName);
+            return default(T);
+        }
+    }
+
     /// <summary>
     /// Return value if this value is found
     /// </summary>
@@ -70,8 +81,8 @@ public static class SaveManager
             T deserializedValue = JsonUtility.FromJson<T>(value);
             return deserializedValue;
         } else {
+            NotFoundLog(saveName);
             return keyNotFound;
-            ReturnValueLog(saveName);
         }
     }
 
@@ -125,7 +136,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetInt(saveName);
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return keyNotFound;
         }
     }
@@ -141,7 +152,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetInt(saveName);
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return keyNotFound;
         }
     }
@@ -199,7 +210,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
             return PlayerPrefs.GetFloat(saveName);
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return keyNotFound;
         }
     }
@@ -216,7 +227,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetFloat(saveName);
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return keyNotFound;
         }
     }
@@ -275,7 +286,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
             return PlayerPrefs.GetString(saveName);
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return null;
         }
     }
@@ -291,7 +302,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetString(saveName);
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return keyNotFound;
         }
     }
@@ -351,7 +362,7 @@ public static class SaveManager
             bool value = PlayerPrefs.GetInt(saveName) == 1;
             return value;
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return false;
         }
     }
@@ -367,7 +378,7 @@ public static class SaveManager
         if(PlayerPrefs.HasKey(saveName)) {
         return PlayerPrefs.GetInt(saveName) == 1;
         } else {
-            ReturnValueLog(saveName);
+            NotFoundLog(saveName);
             return keyNotFound;
         }
     }
@@ -401,7 +412,7 @@ public static class SaveManager
 
 
 
-    private static void ReturnValueLog(string saveName) {
+    private static void NotFoundLog(string saveName) {
         Debug.Log($"{saveName} is not available in PlayerPrefs");
     }
     private static void AvailableLogError(string saveName) {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 
 
-namespace NvcUtils.Save {
-public static class SaveDefaultManager
+namespace NvcUtils.NvcSave {
+public static class MemorySaveManager
 {
     /// <summary>
     /// Dictionary with all default-saves values in key-value format
