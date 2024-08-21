@@ -19,6 +19,8 @@ public static class SaveManager
         public static void Save<T>(string saveName, T value) {
         if(!PlayerPrefs.HasKey(saveName)) {
             SaveJson(saveName, value);
+        } else {
+            AvailableLogError(saveName);
         }
     }
 
@@ -34,6 +36,8 @@ public static class SaveManager
             SaveJson(saveName, value);
         } else if (overwrite) {
             Overwrite(saveName, value);
+        } else {
+            AvailableLogError(saveName);
         }
     }
 
@@ -49,7 +53,7 @@ public static class SaveManager
             string jsonString = JsonUtility.ToJson(value);
             PlayerPrefs.SetString(saveName, jsonString);
         } else {
-            ReturnValueLog(saveName);
+            UpdateLogError(saveName);
         }
     }
 
@@ -67,6 +71,7 @@ public static class SaveManager
             return deserializedValue;
         } else {
             return keyNotFound;
+            ReturnValueLog(saveName);
         }
     }
 
