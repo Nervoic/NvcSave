@@ -13,8 +13,10 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 
 4.__Generic type support__:
 -NvcSave is designed with flexibility in mind, supporting generic types to accommodate a wide range of data types. This ensures that you can save and load any data type, from simple primitives to complex custom objects, with ease.
+
 5.__Json save support__:
 -Support for saving data in JSON format and built-in encryption using AES algorithms
+
 6.__Encrypt and decrypt support__:
 -Ability to encrypt and decrypt data during serialization and deserialization
 # Installation
