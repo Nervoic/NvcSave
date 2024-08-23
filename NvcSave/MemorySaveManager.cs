@@ -67,7 +67,7 @@ public static class MemorySaveManager
     public static T GetDefaultValue<T>(string keyName, T keyNotFoundValue) {
         if(defaultValues.ContainsKey(keyName)) {
         return (T)defaultValues[keyName];
-        } else {
+        } else { 
             LogNotFound(keyName);
             return keyNotFoundValue;
         }
