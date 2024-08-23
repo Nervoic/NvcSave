@@ -28,7 +28,10 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 3.__Move to Unity Project__:
 -Copy the NvcSave folder into the Assets directory of your Unity project.
 
-4.__Start Using NvcSave__:
+4.__Add dependency__:
+-Find the manifest file in the packages folder of your unity manifest.json, open it and add a dependency - "com.unity.nuget.newtonsoft-json": "3.0.2"
+
+5.__Start Using NvcSave__:
 -To begin using the library, add the following line to your scripts:
 using NvcUtils.Save;
 
@@ -42,7 +45,10 @@ After you have added the string using NvcUtils.Save, you can use all the functio
 -It is used to store data in memory for the duration of the project. It can be useful for simple saves and system resets.
 
 3. __JsonSaveManager__:
--It is used to save and encrypt data in json format. Before using this class, make sure that you have entered the key and iv for encryption, or implemented a cloud-based key generation system.
+-It is used to save and encrypt data in json format. Before using this class, make sure that you have entered the key and iv in CryptoManager class for encryption, or implemented a cloud-based key generation system.
+
+4. __CryptoManager__:
+-It is used to encrypt and decrypt data. By default, it is used by the JsonSaveManager class. Before using, do not forget to enter your key and iv in the key and iv field
 
 For more information, see the xml documentation inside the code.
 
