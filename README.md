@@ -13,7 +13,10 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 
 4.__Generic type support__:
 -NvcSave is designed with flexibility in mind, supporting generic types to accommodate a wide range of data types. This ensures that you can save and load any data type, from simple primitives to complex custom objects, with ease.
-
+5.__Json save support__:
+-Support for saving data in JSON format and built-in encryption using AES algorithms
+6.__Encrypt and decrypt support__:
+-Ability to encrypt and decrypt data during serialization and deserialization
 # Installation
 
 1.__Download the Repository__:
@@ -32,11 +35,14 @@ using NvcUtils.Save;
 # How to use:
 After you have added the string using NvcUtils.Save, you can use all the functions from this library. The library contains 2 classes - SaveManager and SaveDefaultManager.
 
-1. __SaveManager__:
+1. __PrefsSaveManager__:
 -It is used to save data locally on the player's computer. Supports saving int, float, string and boolean variables, and generalized types, overwriting saves, getting and deleting. it contains all the necessary checks to ensure that the program works correctly.
 
-2. __SaveDefaultManager__:
+2. __MemorySaveManager__:
 -It is used to store data in memory for the duration of the project. It can be useful for simple saves and system resets.
+
+3. __JsonSaveManager__:
+-It is used to save and encrypt data in json format. Before using this class, make sure that you have entered the key and iv for encryption, or implemented a cloud-based key generation system.
 
 For more information, see the xml documentation inside the code.
 
