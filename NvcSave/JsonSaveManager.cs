@@ -1,5 +1,8 @@
 
+using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -7,6 +10,8 @@ using UnityEngine;
 namespace NvcUtils.NvcSave {
 public static class JsonSaveManager
 {
+    private static readonly string key = "your-128-196-256-bit-key";
+    private static readonly string iv = "your-128-bit-iv";
 
     /// <summary>
     /// Added new empty json-file
@@ -37,6 +42,7 @@ public static class JsonSaveManager
         string deserializedString = File.ReadAllText(jsonPath);
         if(string.IsNullOrWhiteSpace(deserializedString)) {
             string jsonString = JsonConvert.SerializeObject(value, Formatting.Indented);
+            jsonString = Encrypt(jsonString);
             File.WriteAllText(jsonPath, jsonString);
         } else {
             OverwriteLog(jsonPath);
@@ -59,6 +65,7 @@ public static class JsonSaveManager
         string deserializedString = File.ReadAllText(jsonPath);
         if(string.IsNullOrWhiteSpace(deserializedString) || isOverwrite) {
             string jsonString = JsonConvert.SerializeObject(value, Formatting.Indented);
+            jsonString = Encrypt(jsonString);
             File.WriteAllText(jsonPath, jsonString);
         } else {
             OverwriteLog(jsonPath);
@@ -78,6 +85,7 @@ public static class JsonSaveManager
             NewJsonFile(jsonPath);
         }
         string jsonString = JsonConvert.SerializeObject(value, Formatting.Indented);
+        jsonString = Encrypt(jsonString);
         File.WriteAllText(jsonPath, jsonString);
     }
 
@@ -93,6 +101,7 @@ public static class JsonSaveManager
         string jsonPath = Path.Combine(filePath, fileName + ".json");
         if(CheckFileToPath(jsonPath)) {
             string deserializedString = File.ReadAllText(jsonPath);
+            deserializedString = Decrypt(deserializedString);
             if(!string.IsNullOrWhiteSpace(deserializedString)) {
                 T deserializedValue = JsonConvert.DeserializeObject<T>(deserializedString);
                 return deserializedValue;
@@ -119,6 +128,7 @@ public static class JsonSaveManager
         string jsonPath = Path.Combine(filePath, fileName + ".json");
         if(CheckFileToPath(jsonPath)) {
             string deserializedString = File.ReadAllText(jsonPath);
+            deserializedString = Decrypt(deserializedString);
             if(!string.IsNullOrWhiteSpace(deserializedString)) {
                 T deserializedValue = JsonConvert.DeserializeObject<T>(deserializedString);
                 return deserializedValue;
@@ -143,6 +153,51 @@ public static class JsonSaveManager
             return true;
         } else {
             return false;
+        }
+    }
+
+    /// <summary>
+    /// Encrypt string
+    /// </summary>
+    /// <param name="stringToEncrypt">String to encrypt</param>
+    /// <returns>Return encrypted and converted to string string</returns>
+    private static string Encrypt(string stringToEncrypt) {
+        using(Aes aes = Aes.Create()) {
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.IV = Encoding.UTF8.GetBytes(iv);
+
+            ICryptoTransform cryptoTransform = aes.CreateEncryptor();
+
+            using(MemoryStream memoryStream = new MemoryStream()) {
+                using(CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoTransform, CryptoStreamMode.Write)) {
+                    using(StreamWriter streamWriter = new StreamWriter(cryptoStream)) {
+                        streamWriter.Write(stringToEncrypt);
+                    }
+                    return Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Decrypt string
+    /// </summary>
+    /// <param name="stringToDecrypt">String to decrypt</param>
+    /// <returns>Return decrypted string</returns>
+    private static string Decrypt(string stringToDecrypt) {
+        using(Aes aes = Aes.Create()) {
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.IV = Encoding.UTF8.GetBytes(iv);
+
+            ICryptoTransform cryptoTransform = aes.CreateDecryptor();
+            byte[] bytes = Convert.FromBase64String(stringToDecrypt);
+
+            using(MemoryStream memoryStream = new MemoryStream(bytes)) {
+                using(CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoTransform, CryptoStreamMode.Read)) {
+                    using(StreamReader streamReader = new StreamReader(cryptoStream)) {
+                        return streamReader.ReadToEnd();
+                    }
+                }
+            }
         }
     }
 
