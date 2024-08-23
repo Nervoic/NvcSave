@@ -38,7 +38,7 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 using NvcUtils.Save;
 
 # How to use:
-After you have added the string using NvcUtils.Save, you can use all the functions from this library. The library contains 2 classes - SaveManager and SaveDefaultManager.
+After you have added the string using NvcUtils.Save, you can use all the functions from this library. The library contains 4 classes - PrefsSaveManager, MemorySaveManager, JsonSaveManager, CryptoManager
 
 1. __PrefsSaveManager__:
 -It is used to save data locally on the player's computer. Supports saving int, float, string and boolean variables, and generalized types, overwriting saves, getting and deleting. it contains all the necessary checks to ensure that the program works correctly.
