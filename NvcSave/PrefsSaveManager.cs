@@ -1,4 +1,5 @@
 
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace NvcUtils.NvcSave {
@@ -50,8 +51,7 @@ public static class PrefsSaveManager
     /// <param name="value">Value to overwrite</param>
     public static void Overwrite<T>(string saveName, T value) {
         if(PlayerPrefs.HasKey(saveName)) {
-            string jsonString = JsonUtility.ToJson(value);
-            PlayerPrefs.SetString(saveName, jsonString);
+            SaveJson(saveName, value);
         } else {
             UpdateLogError(saveName);
         }
@@ -60,11 +60,11 @@ public static class PrefsSaveManager
     public static T Get<T>(string saveName) {
         if(PlayerPrefs.HasKey(saveName)) {
             string value = PlayerPrefs.GetString(saveName);
-            T deserializedValue = JsonUtility.FromJson<T>(value);
+            T deserializedValue = JsonConvert.DeserializeObject<T>(value);
             return deserializedValue;
         } else {
             NotFoundLog(saveName);
-            return default(T);
+            return default;
         }
     }
 
@@ -78,7 +78,7 @@ public static class PrefsSaveManager
     public static T TryGet<T>(string saveName, T keyNotFound) {
         if(PlayerPrefs.HasKey(saveName)) {
             string value = PlayerPrefs.GetString(saveName);
-            T deserializedValue = JsonUtility.FromJson<T>(value);
+            T deserializedValue = JsonConvert.DeserializeObject<T>(value);
             return deserializedValue;
         } else {
             NotFoundLog(saveName);
@@ -399,7 +399,7 @@ public static class PrefsSaveManager
 
 
     private static void SaveJson<T>(string saveName, T value) {
-        string jsonString = JsonUtility.ToJson(value);
+        string jsonString = JsonConvert.SerializeObject(value);
         PlayerPrefs.SetString(saveName, jsonString);
     }
 
