@@ -154,7 +154,7 @@ public static class JsonSaveManager
         Debug.Log($"You are try create new json-file, by the path where this file is already available on the way {filePath}");
     }
     private static void OverwriteLog(string filePath) {
-        Debug.Log($"You are try saving data in json-file, which already contains the data to {filePath}. If you are need overwrite json-file, use OverwriteAll function");
+        Debug.Log($"You are try saving data in json-file, which already contains the data to {filePath}. If you are need overwrite json-file, use OverwriteAll method");
     }
     private static void StringIsNullLog(string filePath) {
         Debug.Log($"{filePath} is null. You cannot be deserialized empty object");
