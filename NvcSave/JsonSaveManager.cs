@@ -44,6 +44,7 @@ public static class JsonSaveManager
             File.WriteAllText(jsonPath, jsonString);
 .    onSaved?.Invoke();
         } else {
+.           onSavedError?.Invoke();
             OverwriteLog(jsonPath);
         }
     }
@@ -68,6 +69,7 @@ public static class JsonSaveManager
             File.WriteAllText(jsonPath, jsonString);
 .    onSaved?.Invoke();
         } else {
+.           onSavedError?.Invoke();
             OverwriteLog(jsonPath);
         }
     }
@@ -87,6 +89,7 @@ public static class JsonSaveManager
         string jsonString = JsonConvert.SerializeObject(value, Formatting.Indented);
         jsonString = CryptoManager.Encrypt(jsonString);
         File.WriteAllText(jsonPath, jsonString);
+.   onSaved?.Invoke();
     }
 
 
@@ -104,6 +107,7 @@ public static class JsonSaveManager
             deserializedString = CryptoManager.Decrypt(deserializedString);
             if(!string.IsNullOrWhiteSpace(deserializedString)) {
                 T deserializedValue = JsonConvert.DeserializeObject<T>(deserializedString);
+onLoad?.Invoke();
                 return deserializedValue;
             }
             else {
