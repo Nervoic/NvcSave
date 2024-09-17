@@ -7,6 +7,10 @@ using UnityEngine;
 namespace NvcUtils.NvcSave {
 public static class JsonSaveManager
 {
+.   public static event Action onSaved;
+.   public static event Action onSavedError;
+.   public static event Action onLoad;
+.   public static event Action onLoadError;
     /// <summary>
     /// Added new empty json-file
     /// </summary>
@@ -38,6 +42,7 @@ public static class JsonSaveManager
             string jsonString = JsonConvert.SerializeObject(value, Formatting.Indented);
             jsonString = CryptoManager.Encrypt(jsonString);
             File.WriteAllText(jsonPath, jsonString);
+.    onSaved?.Invoke();
         } else {
             OverwriteLog(jsonPath);
         }
@@ -61,6 +66,7 @@ public static class JsonSaveManager
             string jsonString = JsonConvert.SerializeObject(value, Formatting.Indented);
             jsonString = CryptoManager.Encrypt(jsonString);
             File.WriteAllText(jsonPath, jsonString);
+.    onSaved?.Invoke();
         } else {
             OverwriteLog(jsonPath);
         }
