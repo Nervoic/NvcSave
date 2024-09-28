@@ -26,7 +26,7 @@ __NvcSave__ is a simple and reliable saving system for Unity that allows you to 
 -Copy the NvcSave folder into the Assets directory of your Unity project.
 
 4.__Add dependency__:
--Find the manifest file in the packages folder of your unity manifest.json, open it and add a dependency - __"com.unity.nuget.newtonsoft-json": "3.0.2"__
+-Find the manifest file in the packages folder of your unity manifest.json, open it and add a dependency - ___"com.unity.nuget.newtonsoft-json": "3.0.2"___
 
 5.__Start Using NvcSave__:
 -To begin using the library, add the following line to your scripts:
